@@ -1,16 +1,39 @@
-# This is a sample Python script.
+def a_new_decorator(a_func):
+    def wrapTheFunction():
+        print("I am doing some boring work before executing a_func()")
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+        a_func()
+
+        print("I am doing some boring work after executing a_func()")
+
+    return wrapTheFunction
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+@a_new_decorator
+def a_function_requiring_decoration():
+    """Hey you! Decorate me!"""
+    print("I am the function which needs some decoration to "
+          "remove my foul smell")
 
+a_function_requiring_decoration()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+#
+# a_function_requiring_decoration()
+# # outputs: I am doing some boring work before executing a_func()
+# #         I am the function which needs some decoration to remove my foul smell
+# #         I am doing some boring work after executing a_func()
+#
+# # the @a_new_decorator is just a short way of saying:
+# a_function_requiring_decoration = a_new_decorator(a_function_requiring_decoration)@a_new_decorator
+# def a_function_requiring_decoration():
+#     """Hey you! Decorate me!"""
+#     print("I am the function which needs some decoration to "
+#           "remove my foul smell")
+#
+# a_function_requiring_decoration()
+# #outputs: I am doing some boring work before executing a_func()
+# #         I am the function which needs some decoration to remove my foul smell
+# #         I am doing some boring work after executing a_func()
+#
+# #the @a_new_decorator is just a short way of saying:
+# a_function_requiring_decoration = a_new_decorator(a_function_requiring_decoration)
